@@ -5,10 +5,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 
 @SpringBootApplication(exclude = {DataSourceAutoConfiguration.class })
-public class BackTasklistApplication {
+public class BackTaskListApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(BackTasklistApplication.class, args);
+		SpringApplication.run(BackTaskListApplication.class, args);
 	}
 
 }
