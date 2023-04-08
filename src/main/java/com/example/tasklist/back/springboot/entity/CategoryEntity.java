@@ -1,9 +1,10 @@
 package com.example.tasklist.back.springboot.entity;
 
-import jakarta.persistence.*;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import javax.persistence.*;
 
 @Entity
 @NoArgsConstructor
