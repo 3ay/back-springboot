@@ -1,11 +1,13 @@
 package com.example.tasklist.back.springboot.controller;
 
+import com.example.tasklist.back.springboot.entity.CategoryEntity;
 import com.example.tasklist.back.springboot.entity.PriorityEntity;
 import com.example.tasklist.back.springboot.repo.PriorityRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 
@@ -33,7 +35,7 @@ public class PriorityController {
 
     }
     @PostMapping("/addPriority")
-    public ResponseEntity <PriorityEntity> addPriority(@RequestBody PriorityEntity priority)
+    public ResponseEntity <PriorityEntity> addPriority(@Valid @RequestBody PriorityEntity priority)
     {
         if(priority.getId() != null && priority.getId() != 0)
         {
@@ -43,6 +45,17 @@ public class PriorityController {
             return new ResponseEntity("missed param: title", HttpStatus.NOT_ACCEPTABLE);
         }
         return ResponseEntity.ok(priorityRepository.save(priority));
+    }
+    @PutMapping("/updatePriority")
+    public ResponseEntity<PriorityEntity> updateCategory(@Valid @RequestBody PriorityEntity priority) {
+        if (priority.getId() != null && priority.getId() != 0) {
+            if (priorityRepository.existsById(priority.getId()) && priorityRepository.existsById(priority.getId())) {
+                return ResponseEntity.ok(priorityRepository.save(priority));
+            } else
+                return new ResponseEntity("redundant param: id doesn't exist", HttpStatus.NOT_ACCEPTABLE);
+        } else {
+            return new ResponseEntity("redundant param: id MUST be determined", HttpStatus.NOT_ACCEPTABLE);
+        }
     }
 
 
