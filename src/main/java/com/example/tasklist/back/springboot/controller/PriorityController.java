@@ -2,6 +2,8 @@ package com.example.tasklist.back.springboot.controller;
 
 import com.example.tasklist.back.springboot.entity.PriorityEntity;
 import com.example.tasklist.back.springboot.repo.PriorityRepository;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -31,9 +33,16 @@ public class PriorityController {
 
     }
     @PostMapping("/addPriority")
-    public PriorityEntity addCategory(@RequestBody PriorityEntity category)
+    public ResponseEntity <PriorityEntity> addPriority(@RequestBody PriorityEntity priority)
     {
-        return priorityRepository.save(category);
+        if(priority.getId() != null && priority.getId() != 0)
+        {
+            return new ResponseEntity("redundant param: id MUST be without value", HttpStatus.NOT_ACCEPTABLE);
+        }
+        if (priority.getTitle() == null || priority.getTitle().trim().length() == 0) {
+            return new ResponseEntity("missed param: title", HttpStatus.NOT_ACCEPTABLE);
+        }
+        return ResponseEntity.ok(priorityRepository.save(priority));
     }
 
 
