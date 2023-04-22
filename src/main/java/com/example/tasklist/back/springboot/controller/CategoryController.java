@@ -74,4 +74,9 @@ public class CategoryController {
         }
         return new ResponseEntity(HttpStatus.OK);
     }
+    @GetMapping("/all")
+    public List<CategoryEntity> findAll()
+    {
+        return categoryRepository.findAll();
+    }
 }

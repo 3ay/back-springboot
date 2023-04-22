@@ -81,5 +81,10 @@ public class PriorityController {
         }
         return new ResponseEntity(HttpStatus.OK);
     }
+    @GetMapping("/all")
+    public List<PriorityEntity> findAll()
+    {
+        return priorityRepository.findAll();
+    }
 
 }
