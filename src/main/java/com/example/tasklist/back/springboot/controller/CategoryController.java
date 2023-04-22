@@ -77,6 +77,6 @@ public class CategoryController {
     @GetMapping("/all")
     public List<CategoryEntity> findAll()
     {
-        return categoryRepository.findAll();
+        return categoryRepository.findAllByOrderByIdAsc();
     }
 }

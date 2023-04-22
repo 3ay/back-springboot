@@ -84,7 +84,7 @@ public class PriorityController {
     @GetMapping("/all")
     public List<PriorityEntity> findAll()
     {
-        return priorityRepository.findAll();
+        return priorityRepository.findAllByOrderByIdAsc();
     }
 
 }
