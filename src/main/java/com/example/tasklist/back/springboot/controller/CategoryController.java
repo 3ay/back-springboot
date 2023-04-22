@@ -4,6 +4,7 @@ import com.example.tasklist.back.springboot.entity.CategoryEntity;
 import com.example.tasklist.back.springboot.entity.PriorityEntity;
 import com.example.tasklist.back.springboot.repo.CategoryRepository;
 
+import com.example.tasklist.back.springboot.search.CategorySearchValues;
 import org.apache.coyote.Response;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpStatus;
@@ -79,4 +80,13 @@ public class CategoryController {
     {
         return categoryRepository.findAllByOrderByIdAsc();
     }
+    @PostMapping("/search")
+    //поиск по любым параметрам CategorySearchValues
+    public ResponseEntity<List<CategoryEntity>> search(@RequestBody CategorySearchValues values)
+    {
+        return ResponseEntity.ok(
+                categoryRepository.findByTitle(values.getText()));
+    }
+
+
 }
