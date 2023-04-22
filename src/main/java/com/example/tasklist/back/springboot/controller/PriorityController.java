@@ -3,6 +3,8 @@ package com.example.tasklist.back.springboot.controller;
 import com.example.tasklist.back.springboot.entity.CategoryEntity;
 import com.example.tasklist.back.springboot.entity.PriorityEntity;
 import com.example.tasklist.back.springboot.repo.PriorityRepository;
+import com.example.tasklist.back.springboot.search.CategorySearchValues;
+import com.example.tasklist.back.springboot.search.PrioritySearchValues;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -85,6 +87,13 @@ public class PriorityController {
     public List<PriorityEntity> findAll()
     {
         return priorityRepository.findAllByOrderByIdAsc();
+    }
+    @PostMapping("/search")
+    //поиск по любым параметрам CategorySearchValues
+    public ResponseEntity<List<PriorityEntity>> search(@RequestBody PrioritySearchValues values)
+    {
+        return ResponseEntity.ok(
+                priorityRepository.findByTitle(values.getText()));
     }
 
 }
